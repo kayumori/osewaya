@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSEWAYA アプリ - ダウンロード</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 30%, #e9ecef 100%);
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 背景の装飾 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(200, 200, 200, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(150, 150, 150, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 90%, rgba(180, 180, 180, 0.06) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            margin: 60px 20px 40px;
+            padding: 50px 30px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08),
+                        0 0 0 1px rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: #ffffff;
+            border-radius: 28px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
+                        0 0 0 3px rgba(200, 200, 200, 0.2);
+            position: relative;
+            border: 3px solid #333333;
+            overflow: hidden;
+        }
+        
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+        
+        .app-icon::after {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 30%;
+            height: 30%;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            filter: blur(10px);
+        }
+        
+        h1 {
+            margin: 0 0 15px;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #333333;
+        }
+        
+        .subtitle {
+            opacity: 0.7;
+            margin-bottom: 40px;
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: #666666;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(200,200,200,0.3);
+            border-radius: 50%;
+            border-top-color: #666666;
+            animation: spin 1.5s ease-in-out infinite;
+            margin-right: 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #666666;
+        }
+        
+        .manual-links {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(200,200,200,0.3);
+        }
+        
+        .manual-text {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .store-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 0 10px;
+        }
+        
+        .store-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 25px;
+            background: rgba(240,240,240,0.8);
+            color: #333333;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 16px;
+            border: 1px solid rgba(200,200,200,0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .store-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .store-button:hover::before {
+            left: 100%;
+        }
+        
+        .store-button:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .store-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .store-icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+        
+        .ios-button {
+            background: rgba(240,240,240,0.9);
+            border: 1px solid rgba(200,200,200,0.4);
+        }
+        
+        .ios-button:hover {
+            background: rgba(255,255,255,1);
+        }
+        
+        .android-button {
+            background: rgba(240,240,240,0.9);
+            border: 1px solid rgba(200,200,200,0.4);
+        }
+        
+        .android-button:hover {
+            background: rgba(255,255,255,1);
+        }
+        
+        .footer {
+            padding: 20px;
+            opacity: 0.6;
+            font-size: 14px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon">
+            <div class="app-icon-content">
+                OSEWAYA<span class="elephant-icon">🐘</span>
+            </div>
+        </div>
+        <h1>OSEWAYA</h1>
+        <p class="subtitle">Premium App Experience</p>
+        
+        <div id="loading-section">
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div class="loading"></div>
+                <span class="loading-text">自動で適切なストアへ移動中...</span>
+            </div>
+        </div>
+        
+        <div class="manual-links" id="manual-links" style="display: none;">
+            <p class="manual-text">自動移動しない場合は、お使いのデバイスに応じて<br>下のボタンをタップしてください</p>
+            <div class="store-buttons">
+                <a href="https://apps.apple.com/jp/app/osewaya%E5%85%AC%E5%BC%8F%E3%82%A2%E3%83%97%E3%83%AA/id6742164706" 
+                   class="store-button ios-button">
+                    <span class="store-icon">🍎</span>
+                    <span>App Store でダウンロード</span>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=jp.osewaya.app" 
+                   class="store-button android-button">
+                    <span class="store-icon">🤖</span>
+                    <span>Google Play でダウンロード</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2025 OSEWAYA App
+    </div>
+
+    <script>
+        // デバイス判定
+        function detectDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // iOS デバイスの判定
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return 'ios';
+            }
+            
+            // Android デバイスの判定
+            if (/android/i.test(userAgent)) {
+                return 'android';
+            }
+            
+            // その他（PC等）
+            return 'other';
+        }
+
+        // リダイレクト実行
+        function redirectToStore() {
+            const device = detectDevice();
+            const iosUrl = "https://apps.apple.com/jp/app/osewaya%E5%85%AC%E5%BC%8F%E3%82%A2%E3%83%97%E3%83%AA/id6742164706";
+            const androidUrl = "https://play.google.com/store/apps/details?id=jp.osewaya.app";
+            
+            console.log('検出されたデバイス:', device);
+            
+            if (device === 'ios') {
+                console.log('iOSデバイス - App Storeへリダイレクト');
+                window.location.href = iosUrl;
+            } else if (device === 'android') {
+                console.log('Androidデバイス - Google Playへリダイレクト');
+                window.location.href = androidUrl;
+            } else {
+                console.log('その他のデバイス - 手動選択を表示');
+                showManualLinks();
+            }
+        }
+
+        // 手動選択リンクを表示
+        function showManualLinks() {
+            document.getElementById('loading-section').style.display = 'none';
+            document.getElementById('manual-links').style.display = 'block';
+        }
+
+        // ページ読み込み完了後に実行
+        window.addEventListener('load', function() {
+            // 1秒待ってからリダイレクト（ユーザーに何が起こっているか分からせるため）
+            setTimeout(function() {
+                redirectToStore();
+                
+                // 3秒後にリダイレクトが失敗した場合、手動リンクを表示
+                setTimeout(function() {
+                    showManualLinks();
+                }, 3000);
+            }, 1000);
+        });
+
+        // デバッグ用（開発時のみ使用）
+        console.log('ユーザーエージェント:', navigator.userAgent);
+        console.log('検出されたデバイス:', detectDevice());
+    </script>
+</body>
+</html>
